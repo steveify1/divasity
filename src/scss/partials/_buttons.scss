@@ -1,0 +1,37 @@
+// ******* BUTTONS *********
+.btn {
+  outline: none;
+  border: none;
+  cursor: pointer;
+  padding: 0.5em 0.875em;
+
+  &:hover {
+    opacity: 0.8;
+  }
+
+  &-primary {
+    background-color: $secondaryColor;
+    color: $white;
+    @include boxShadow(0 4px 0px darken($secondaryColor, 25));
+  }
+
+  &-secondary {
+    background-color: $secondaryColor;
+  }
+}
+
+.btn-rounded {
+  @include borderRadius(3px);
+}
+
+.btn-full {
+  width: 100%;
+}
+
+.btn-success {
+  background-color: rgb(26, 139, 15);
+}
+
+.btn-danger {
+  background-color: rgb(219, 14, 31);
+}

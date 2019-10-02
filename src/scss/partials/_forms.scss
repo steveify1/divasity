@@ -1,0 +1,70 @@
+.form-container {
+    padding: 1.5em 1em;
+    width: 90%;
+    max-width: 480px;
+    margin: auto;
+
+    .form-title {
+        margin-bottom: 0.5em;
+        text-align: center;
+        color: $gray;
+
+        &+.form-paragraph {
+            text-align: center;
+            margin: 0.5em auto;
+            color: $gray;
+
+            span {
+                color: $pink;
+            }
+        }
+    }
+}
+
+.form {
+    width: 100%;
+}
+
+// Applies only to form-groups within a form with the class "form"
+form.form .form-group {
+    width: 100%;
+    @include flex;
+    @include flexDirection(row);
+    position: relative;
+    margin-bottom: 1em;
+}
+
+label {
+    text-transform: capitalize;
+    color: $gray;
+    // @include transform(translate(.5em, 150%));
+    // @include transition(all 0.2s ease);
+    z-index: -1;
+}
+
+label.slide-up {
+    font-size: 0.875rem;
+    color: $primaryColor;
+    @include transform(translateY(0));
+}
+
+input,
+select,
+textarea {
+    background-color: transparent;
+    // padding: 0.5em 0.5em;
+    // color: $white;
+}
+
+.form-container,
+input,
+select,
+textarea {
+    @include borderRadius(3px);
+    border: none;
+    outline: none;
+}
+
+.form-paragraph {
+    margin-top: 0.5em;
+}

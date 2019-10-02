@@ -1,0 +1,593 @@
+// @import './partials/reset';
+@import "./config/config.scss";
+
+$mobile: 576px;
+$smallTab: 768px;
+$bigTab: 900px;
+$tv: 1200px;
+
+body {
+  font-family: "Roboto Condensed";
+  font-family: $primaryFont;
+  overflow-x: hidden;
+  max-width: 1400px;
+  width: 100vw;
+  margin: auto;
+  color: $gray;
+  background-color: rgb(249, 254, 255);
+}
+
+body::-webkit-scrollbar {
+  width: 0.5em;
+
+  &-thumb {
+    background-color: darken($lightGray, 20);
+    @include borderRadius(30px);
+  }
+}
+
+#wrapper {
+  min-height: 100vh;
+  width: 100%;
+}
+
+a,
+.btn {
+  font-family: inherit;
+}
+
+// LIghtbox
+.app-lightbox {
+  display: none;
+  position: fixed;
+  top: 50%;
+  left: 50%;
+  @include transform(translate(-50%, -50%));
+  height: 100%;
+  width: 100%;
+  background-color: rgba(0, 0, 0, 0.7);
+
+  &.active {
+    display: block;
+  }
+}
+
+// Modal
+.app-modal {
+  display: none;
+  position: fixed;
+  top: 35%;
+  left: 50%;
+  @include transform(translate(-50%, -35%));
+  width: 90%;
+  max-width: 500px;
+  min-height: 300px;
+  background-color: $white;
+  @include borderRadius(5px);
+  padding: 0.875em;
+
+  .brand {
+    @include flex;
+    justify-content: center;
+    margin-bottom: 1em;
+  }
+
+  h3 {
+    text-align: center;
+    text-decoration: underline;
+  }
+
+  p {
+    margin: 1em 0;
+    line-height: 1.5;
+  }
+
+  .btn {
+    margin: auto;
+  }
+
+  &.active {
+    display: block;
+  }
+}
+
+//
+#wrapper {
+  min-height: 100vh;
+}
+
+// Main Header
+header#main-header {
+  max-width: 100vw;
+  overflow: hidden;
+  min-height: 40px;
+  @include alignItems(center);
+  .main-header-user-area,
+  .main-header-search-and-notification {
+    @include alignItems(center);
+    height: 100%;
+  }
+
+  .main-header-user-area {
+    padding: 0.2em 0 0.2em $space-x;
+    @include alignItems(center);
+
+    &_profile-pic {
+      height: 80%;
+
+      img {
+        height: 100%;
+      }
+    }
+
+    &_name {
+      margin: auto 0 auto 4em;
+    }
+  }
+
+  .main-header-search-and-notification {
+    padding: 0 $space-x;
+    background-color: $primaryColor;
+    color: $white;
+    justify-content: space-between; /*Chrome,Safari*/
+    -webkit-clip-path: polygon(0px 100%, 100% 100%, 100% 0px, 3% 0px);
+    clip-path: polygon(0px 100%, 100% 100%, 100% 0px, 3% 0px);
+
+    .main-header-search {
+      width: 50%;
+      .form-group {
+        background-color: $white;
+        @include alignItems(center);
+        // justify-content: space-around;
+        width: 100%;
+        padding: 0 1rem;
+        @include borderRadius(50px);
+
+        input {
+          padding: 0.5rem 5%;
+          // background-color: red;
+          width: 90%;
+        }
+
+        @include maxQuery(#{$smallTab -1}) {
+          input {
+            @include transition(all 0.5s ease);
+            @include transform(scaleX(0));
+            transform-origin: right;
+          }
+        }
+      }
+    }
+
+    .main-header-notify {
+      @include alignItems(center);
+
+      img {
+        margin-left: 1em;
+        width: 40%;
+      }
+    }
+  }
+
+  @include minQuery($smallTab) {
+    grid-template-columns: 1fr 1.5fr;
+  }
+}
+
+// Main App Hero/Banner
+#main-hero {
+  position: relative;
+
+  #brand-and-nav {
+    position: absolute;
+    z-index: 2;
+    width: 100%;
+    padding: 0.5em 1em;
+    border-bottom: 1px solid transparentize($white, 0.5);
+    justify-content: space-around;
+    @include alignItems(center);
+    background-color: rgba(0, 0, 0, 0.1);
+
+    .logo {
+      color: $white;
+      font-weight: 600;
+    }
+
+    #main-nav {
+      justify-content: space-between;
+
+      @include maxQuery($smallTab) {
+        display: none;
+      }
+
+      .main-menu {
+        flex-grow: 0.5;
+        justify-content: space-between;
+        @include alignItems(center);
+        margin-bottom: 0;
+
+        .menu-item {
+          & + .menu-item {
+            margin-left: 1em;
+          }
+
+          a {
+            color: $white;
+            text-transform: capitalize;
+            @include transition(color 0.3s ease);
+          }
+
+          a:hover {
+            color: $secondaryColor;
+          }
+        }
+      }
+
+      .login-register {
+        a {
+          background-color: $white;
+          background-color: $primaryColor;
+          color: $white;
+        }
+
+        @include minQuery($smallTab) {
+          margin-left: 2em;
+        }
+      }
+    }
+  }
+
+  .hero-section {
+    height: inherit;
+
+    &-item {
+      min-height: 200px;
+      max-height: 500px;
+      position: relative;
+      height: 40vh;
+      width: 100%;
+      overflow: hidden;
+      justify-content: center;
+      @include alignItems(center);
+
+      &::after {
+        content: "";
+        background-color: rgba(0, 0, 0, 0.3);
+        position: absolute;
+        top: 0;
+        bottom: 0;
+        height: 100%;
+        width: 100%;
+        z-index: -1;
+      }
+
+      &_img {
+        @include background(
+          linear-gradient(rgba(0, 0, 0, 0.0), rgba(0, 0, 0, 0.0)),
+          none
+        );
+        position: absolute;
+        z-index: -2;
+        top: 0;
+        width: 100%;
+        bottom: 0;
+        @include transform(scale(1.05));
+
+        img {
+          display: none;
+        }
+      }
+
+      &:first-child {
+        .hero-section-item_img {
+          background-image: url("./img/fabio-spinelli-28P74KO_l3k-unsplash.jpg");
+        }
+      }
+
+      &:nth-child(2) {
+        .hero-section-item_img {
+          background-image: url("./img/eye-for-ebony-aZzXKGcyWqk-unsplash.png");
+        }
+      }
+      &:last-child {
+        .hero-section-item_img {
+          background-image: url("./img/bbh-singapore-Y_KoxMDJ50U-unsplash.png");
+        }
+      }
+
+      h2 {
+        font-weight: 600;
+        text-transform: uppercase;
+        color: $white;
+      }
+
+      &_service {
+        position: absolute;
+        bottom: 5%;
+        left: 50%;
+        @include transform(translateX(-50%));
+        text-align: center;
+
+        p {
+          margin-bottom: $space-y-sm;
+          text-transform: capitalize;
+          color: $white;
+        }
+
+        a {
+          background-color: $secondaryColor;
+          color: $white;
+          @include boxShadow(0 4px 0px darken($secondaryColor, 25));
+        }
+      }
+    }
+
+    @include minQuery($mobile) {
+      grid-template-columns: repeat(3, 1fr);
+      &-item {
+        max-height: 500px;
+        height: 100vh;
+        overflow: hidden;
+
+        img {
+          @include transform(scale(1.05));
+        }
+      }
+    }
+  }
+}
+
+// ********* The Big Picture Section
+#big-picture {
+  margin-top: $space-y;
+  header {
+    padding: 0.5em $space-x;
+    text-align: center;
+    text-transform: uppercase;
+
+    h2 {
+      font-weight: 600;
+    }
+  }
+
+  .big-picture_video {
+    width: 100%;
+    overflow: hidden;
+    position: relative;
+    cursor: pointer;
+    img {
+      width: 100%;
+      @include objectFit;
+    }
+
+    i {
+      position: absolute;
+      top: 50%;
+      left: 50%;
+      @include transform(translate(-50%, -50%));
+      color: $white;
+      z-index: 2;
+      background-color: rgb(255, 51, 0);
+      padding: 0.5em 1.5em;
+    }
+  }
+}
+
+// ********* Business Support Programs ********* */
+.business-support-programs {
+  margin-bottom: $space-y;
+  header {
+    margin: $space-y 0;
+    background-color: $primaryColor;
+    color: $white;
+    padding: 0 $space-x;
+    width: fit-content;
+    h2 {
+      text-transform: uppercase;
+    }
+  }
+
+  &_outline {
+    margin-top: $space-y-sm;
+    padding: 0 $space-x;
+    grid-gap: 2em 0em;
+
+    .card {
+      @include boxShadow(0 15px 15px rgba(0, 0, 0, 0.2));
+      grid-template-rows: 1fr 1fr;
+      height: 300px;
+      width: 100%;
+
+      &-img {
+        position: relative;
+        overflow: hidden;
+        @include background(none, inherit, $bcg-position: top);
+
+        img {
+          @include transform(translateY(-2em));
+        }
+
+        &::after {
+          content: "";
+          height: 100%;
+          height: 100%;
+          position: absolute;
+          top: 0;
+          left: 0;
+          z-index: 2;
+          background-color: transparentize($primaryColor, 0.8);
+        }
+      }
+
+      &-text {
+        justify-content: space-between;
+        &-title {
+          text-transform: capitalize;
+          color: $primaryColor;
+        }
+      }
+
+      &-link {
+        color: $primaryColor;
+        width: fit-content;
+        margin-left: auto;
+      }
+    }
+
+    @include minQuery($mobile) {
+      grid-template-columns: repeat(3, 1fr);
+      justify-content: center;
+      grid-gap: 2em;
+
+      .card {
+        height: 400px;
+        @include transition(all 0.5s ease);
+
+        &:nth-child(2) {
+          @include transform(scale(1.03));
+        }
+      }
+    }
+  }
+}
+
+// ********* Company Visions ********* */
+.company-vision {
+  margin-bottom: $space-y;
+  header {
+    background-color: $primaryColor;
+    color: $white;
+    padding: 0 $space-x;
+    width: fit-content;
+    margin: 0 0 $space-y auto;
+    h2 {
+      text-transform: uppercase;
+    }
+  }
+
+  &_outline {
+    padding: 0 $space-x;
+    grid-gap: 1em 2em;
+
+    .card {
+      @include alignItems(center);
+      text-align: center;
+
+      &-img {
+        display: inline-block;
+        i {
+          font-size: calc(2rem + 2vw);
+          color: $primaryColor;
+        }
+      }
+
+      &-text {
+        color: $secondaryColor;
+        margin-top: $space-y-sm;
+      }
+    }
+
+    @include minQuery($mobile) {
+      grid-template-columns: repeat(3, 1fr);
+    }
+  }
+
+  .cta {
+    margin-left: auto;
+    margin-right: auto;
+    margin: $space-y-sm auto 0;
+    justify-content: center;
+  }
+}
+
+// ******** Testimonials *********
+.testimonials {
+  padding: 0 $space-x;
+  header {
+    margin-bottom: $space-y-sm;
+    text-align: center;
+
+    h2 {
+      text-transform: uppercase;
+      font-weight: 600;
+    }
+  }
+  .testimonial {
+    padding: 0 2em;
+
+    @include minQuery($mobile) {
+      min-width: 50%;
+    }
+
+    @include minQuery($smallTab) {
+      min-width: 33.33%;
+    }
+
+    &-person {
+      @include alignItems(center);
+
+      &-img {
+        margin-right: 1em;
+
+        img {
+          width: 80%;
+        }
+      }
+
+      &-profile {
+        margin-bottom: $space-y-sm;
+        text-transform: capitalize;
+
+        &__name {
+          font-weight: 600;
+        }
+
+        &__occupation {
+          color: $secondaryColor;
+        }
+      }
+    }
+
+    &-text {
+      text-align: center;
+    }
+  }
+}
+
+// Social Icon Section
+.social-icons {
+  margin-top: $space-y;
+  padding: 1em $space-x;
+  justify-content: flex-end;
+  flex-wrap: wrap;
+  -ms-flex-wrap: wrap;
+  &,
+  .social-icon {
+    @include alignItems(center);
+
+    &:not(:first-child) {
+      margin-left: 1em;
+    }
+
+    img {
+      width: calc(15px + 1vw);
+      max-width: 70px;
+    }
+
+    &_name {
+      color: $gray;
+      font-size: 0.65rem;
+    }
+  }
+}
+
+// ********* Footer **********
+footer {
+  // margin-top: 10em; // For testing purposes. Please, remember to comment out this specification.
+  background-color: $primaryColor;
+  min-height: 40px;
+  color: $white;
+  padding: 1em;
+  text-align: center;
+  font-size: 0.875rem;
+}

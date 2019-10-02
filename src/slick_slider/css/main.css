@@ -1,0 +1,87 @@
+*,
+*::after,
+*::before {
+  padding: 0;
+  margin: 0;
+  box-sizing: border-box;
+}
+
+body {
+  background-color: whitesmoke;
+  font-family: "Montserrat";
+}
+
+section {
+  margin: 3em 0;
+}
+section h2 {
+  text-align: center;
+  color: #075b92;
+}
+section .slide-container {
+  display: flex;
+  flex-wrap: nowrap;
+  overflow-x: scroll;
+  padding: auto 2em;
+  transition: all 3s ease;
+  scroll-behavior: smooth;
+}
+section .slide-container::-webkit-scrollbar {
+  display: none;
+}
+section .slide-container .slide {
+  min-width: 100%;
+  display: flex;
+  flex-direction: column;
+  justify-content: center;
+  align-items: center;
+  overflow: hidden;
+}
+@media screen and (min-width: 576px) {
+  section .slide-container .slide {
+    min-width: 50%;
+  }
+}
+section .slide-container .slide .slide-content {
+  background-color: #fff;
+  display: flex;
+  flex-direction: column;
+  grid-template-rows: 1fr auto 1fr;
+  justify-content: center;
+  align-items: center;
+  width: 90%;
+  max-width: 500px;
+  height: 400px;
+  padding: 1em;
+  border-radius: 5px;
+  position: relative;
+  transition: all 0.5s ease;
+}
+section .slide-container .slide .slide-content:hover {
+  box-shadow: none;
+}
+section .slide-container .slide .client-image {
+  height: calc(40px + 6vw);
+  width: calc(40px + 6vw);
+  margin: auto;
+  max-width: 120px;
+  max-height: 120px;
+  border-radius: 100%;
+  overflow: hidden;
+}
+section .slide-container .slide .client-image img {
+  width: 100%;
+  object-fit: contain;
+  margin: auto;
+}
+section .slide-container .slide p {
+  font-size: 0.875rem;
+  text-align: center;
+}
+section .slide-container .slide p.client-name {
+  text-align: right;
+  margin-top: 1em;
+  color: #075b92;
+}
+
+/*# sourceMappingURL=main.css.map */
